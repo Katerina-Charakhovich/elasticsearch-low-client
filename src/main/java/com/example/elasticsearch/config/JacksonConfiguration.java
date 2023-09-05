@@ -12,7 +12,6 @@ public class JacksonConfiguration {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.configure(MapperFeature.DEFAULT_VIEW_INCLUSION, true);
         mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-
         return mapper;
     }
 }

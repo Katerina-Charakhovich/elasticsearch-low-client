@@ -8,13 +8,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "com.baeldung.spring.data.es.repository")
-@ComponentScan(basePackages = { "com.baeldung.spring.data.es.service" })
+@ComponentScan(basePackages = { "com.example.elasticsearch" })
 public class ElasticSearchConfig {
 
     @Bean
     public RestClient getElasticSearchClient() {
-        // Create the low-level client
         return RestClient.builder(
                 new HttpHost("localhost", 9200, "http")).build();
     }

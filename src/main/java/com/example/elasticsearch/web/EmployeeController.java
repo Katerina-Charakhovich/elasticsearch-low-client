@@ -3,8 +3,7 @@ package com.example.elasticsearch.web;
 import com.example.elasticsearch.model.Employee;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
+
 import org.apache.http.util.EntityUtils;
 import org.elasticsearch.client.Request;
 import org.elasticsearch.client.Response;
@@ -14,9 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -41,7 +37,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findEmployeeById(@PathVariable final String id) throws IOException {
+    public ResponseEntity<?> findEmployeeById(@PathVariable final String id){
         try {
             Response response = restClient.performRequest(new Request("GET", "employees/_doc/" + id));
             String responseBody = EntityUtils.toString(response.getEntity());
@@ -89,7 +85,6 @@ public class EmployeeController {
     public ResponseEntity<?> findBySearchParams(@RequestParam(name = "field") String field,
                                                 @RequestParam String value) {
         try {
-            int i = 0;
             String query = "{\"query\":{\"match\":{\"" +field+"\":\"" + value + "\"}}}";
             Request request = new Request("GET", "employees/_search");
             request.setJsonEntity(query);
